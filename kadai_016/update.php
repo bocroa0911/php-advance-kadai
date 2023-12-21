@@ -50,26 +50,26 @@ if (isset($_GET['id'])) {
         $pdo = new PDO($dsn, $user, $password);
 
         // idカラムの値をプレースホルダ（:ID)に置き換えたSQL文をあらかじめ用意する
-        $sql_select_product = 'SELECT * FROM books WHERE id = :id';
-        $stmt_select_product = $pdo->prepare($sql_select_book);
+        $sql_select_genre = 'SELECT * FROM books WHERE id = :id';
+        $stmt_select_genre = $pdo->prepare($sql_select_book);
 
         // bindValue()メソッドを使って実際の値をプレースホルダにバインドする（割り当てる）
-        $stmt_select_product->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
+        $stmt_select_genre->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
        
         // SQL文を実行する
-        $stmt_select_product->execute();
+        $stmt_select_genre->execute();
 
         // SQL文の実行結果を配列で取得する
         // 補足：１つのレコード（横１行のデータ）のみを取得したい場合、fetch()メソッドを使えばカラム名がキーになった１次元配列を取得できる
-        $product = $stmt_select_product->fetch(PDO::FETCH_ASSOC);
+        $genre = $stmt_select_genre->fetch(PDO::FETCH_ASSOC);
 
         // idパラメータの値と同じidのデータが存在しない場合はエラーメッセージを表示して処理を終了する
         // 補足：fetch()メソッドは実行結果が取得できなかった場合にFALSEを返す
-        if ($product === FALSE) {
+        if ($genre === FALSE) {
             exit('idパラメータの値が不正です。');
         }
 
-        // genresテーブルからgenre_codeカラムのデータ取得をするためのSQL文を変数$sql_select_vendor_codesに代入する
+        // genresテーブルからgenre_codeカラムのデータ取得をするためのSQL文を変数$sql_select_genre_codesに代入する
         $sql_select_genre_codes = 'SELECT genre_code FROM genres';
 
         // SQL文を実行する
