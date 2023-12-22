@@ -51,7 +51,7 @@ if (isset($_GET['id'])) {
 
         // idカラムの値をプレースホルダ（:ID)に置き換えたSQL文をあらかじめ用意する
         $sql_select_genre = 'SELECT * FROM books WHERE id = :id';
-        $stmt_select_genre = $pdo->prepare($sql_select_book);
+        $stmt_select_genre = $pdo->prepare($sql_select_genre);
 
         // bindValue()メソッドを使って実際の値をプレースホルダにバインドする（割り当てる）
         $stmt_select_genre->bindValue(':id', $_GET['id'], PDO::PARAM_INT);
