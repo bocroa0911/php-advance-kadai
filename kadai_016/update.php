@@ -38,7 +38,7 @@ if (isset($_POST['submit'])) {
         $message = "書籍を{$count}件編集しました。";
 
         // 商品一覧ページにリダイレクトさせる（同時にmessageパラメータも渡す）
-        header("Location: read.php?message={message}");
+        header("Location: read.php?message={$message}");
     } catch (PDOException $e) {
         exit($e->getMessage());
     }    
@@ -135,7 +135,7 @@ if (isset($_GET['id'])) {
                         // 配列の中身を順番に取り出し、セレクトボックスの選択肢として出力する
                         foreach ($genre_codes as $genre_code) {
                             // もし変数$genre_codeが商品のジャンルコードの値と一致していれば、selected属性をつけて初期値にする
-                            if ($genre_code === $genre['genre_code']) {
+                            if ($genre_code === $book['genre_code']) {
                             echo "<option value='{$genre_code}'selected>{$genre_code}</option>";
                             } else{
                                 echo "<option value='{$genre_code}'>{$genre_code}</option>";
